@@ -1,5 +1,5 @@
 //desactivation du div input
-$("#nameWinnerInput").hide();
+$("#nameWinnerInputDiv").hide();
 
 
 let motRandom = "";
@@ -24,7 +24,7 @@ for(let index = 0; index < alphabet.length; index++){
     $("#toucheAlphabet").append(nameButton[index]);
 }
 
-//Création du tableau des meilleurs scores
+//Création du tableau html des meilleurs scores
 let tableofBetter = $("<table>");
 
 let thead = $("<thead>");
@@ -40,17 +40,35 @@ let tbody = $("<tbody>");
 
 for(let index = 0; index < 10; index++){
     let tr = $("<tr>");
+    tr.attr("id", "tr"+index);
+
     let td1 = $("<td>").text(index+1);
-    let td2 = $("<td>").text("-------");
-    let td3 = $("<td>").text("-------");
-    let td4 = $("<td>").text("-------");
+    let td2 = $("<td>").text("-");
+    let td3 = $("<td>").text("-");
+    let td4 = $("<td>").text("-");
     tbody.append(tr.append(td1, td2, td3, td4));
 }
 $("#tableBestWin").append(tableofBetter.append(thead, tbody));
 tableofBetter.css('text-align', 'center');
 
-
+//declaration de variables
 let letter, nbChange = 3, wordUser = [], lettreOk, countLetter = 0;
+
+
+//initialisation du tableau des meilleurs vainqueurs
+function playerWin(){
+    this.name="";
+    this.score=10000;
+    this.time=10000;
+} 
+//tableau stockant le nom des 10 meilleures score
+let bestPlayer = [];
+//initialisation du tableau
+for (let i=0;i<10;i++)     
+    bestPlayer[i] = new playerWin();
+
+console.log(bestPlayer);
+
 
 //initialisation du mot avec des "_"
 const initWordUser = () =>{
@@ -111,9 +129,30 @@ const statuJeu = () =>{
     else if(wordUser.join("")==motRandom){
         console.log("gagné !");
         $("#message").html('<h4>'+'Bravo, vous avez trouvez !'+'</h4>');
-        //activation du div input
-        $("#nameWinnerInput").show();
+        tenBestWinner();
     }
+}
+
+//recupération du nom du gagnant et ajout dans le tableau des 10 meilleurs
+const tenBestWinner = () =>{
+    //activation du div input
+    $("#nameWinnerInputDiv").show();
+
+    $(function(){
+        $("#nameWinnerInput").change(function(){
+            bestPlayer[0].name = $("#nameWinnerInput").val();
+            console.log("Winner : "+bestPlayer[0].name);
+            $("#nameWinnerInput").val(""); 
+            displayTenBestWinner();
+        });        
+    }); 
+}
+
+const displayTenBestWinner = ()=>{
+    //affichage du tableau des 10 meilleurs scores
+    for(let i=0; i<bestPlayer.length; i++)
+        if(bestPlayer[i].name !="")
+            $("#tr"+i).html('<td>'+(i+1)+'</td><td>'+bestPlayer[i].name+'</td><td>'+bestPlayer[i].score+'</td><td>'+bestPlayer[i].time+'</td>'); 
 }
 
 //rechargement de la page
