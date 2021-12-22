@@ -25,11 +25,29 @@ for(let index = 0; index < alphabet.length; index++){
 }
 
 //Création du tableau des meilleurs scores
-// for(let index = 0; index < 10; index++){
-//     nameButton[index] = $('<button>').text(nameButton[index].toLocaleUpperCase());
-//     nameButton[index].attr('id', alphabet[index]);
-//     $("#toucheAlphabet").append(nameButton[index]);
-// }
+let tableofBetter = $("<table>");
+
+let thead = $("<thead>");
+let trh = $("<tr>");
+let tdh1 = $("<td>").text("Ranking");
+let tdh2 = $("<td>").text("Name");
+let tdh3 = $("<td>").text("score");
+let tdh4 = $("<td>").text("gameTime");
+
+thead.append(trh.append(tdh1, tdh2, tdh3, tdh4));
+
+let tbody = $("<tbody>");
+
+for(let index = 0; index < 10; index++){
+    let tr = $("<tr>");
+    let td1 = $("<td>").text(index+1);
+    let td2 = $("<td>").text("-------");
+    let td3 = $("<td>").text("-------");
+    let td4 = $("<td>").text("-------");
+    tbody.append(tr.append(td1, td2, td3, td4));
+}
+$("#tableBestWin").append(tableofBetter.append(thead, tbody));
+tableofBetter.css('text-align', 'center');
 
 
 let letter, nbChange = 3, wordUser = [], lettreOk, countLetter = 0;
