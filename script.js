@@ -1,7 +1,7 @@
 //desactivation du div input
 $("#nameWinnerInputDiv").hide();
 
-
+//localStorage.clear();
 let motRandom = "";
 console.log(motRandom+" length = "+word.length);
 
@@ -12,53 +12,68 @@ const newWordGenerator = () =>{
 
 //création et initialisation du tableau de nom des touches
 let nameButton = [];
-for(let index = 0; index < alphabet.length; index++){
-    nameButton[index] = alphabet[index];
+
+const copyAlphabet = () =>{
+    for(let index = 0; index < alphabet.length; index++){
+        nameButton[index] = alphabet[index];
+    }
 }
+
 
 
 //Création des touche A,B,C....Z
-for(let index = 0; index < alphabet.length; index++){
-    nameButton[index] = $('<button>').text(nameButton[index].toLocaleUpperCase());
-    nameButton[index].attr('id', alphabet[index]);
-    $("#toucheAlphabet").append(nameButton[index]);
+const generateKeyPlaying = () =>{
+    copyAlphabet();
+    for(let index = 0; index < alphabet.length; index++){
+        nameButton[index] = $('<button>').text(alphabet[index].toLocaleUpperCase());
+        nameButton[index].attr('id', alphabet[index]);
+        nameButton[index].attr('class', 'alphabetKey');
+        $("#toucheAlphabet").append(nameButton[index]);
+    }
 }
 
 //Création du tableau html des meilleurs scores
-let tableofBetter = $("<table>");
+const generateTableWinner = () =>{
 
-let thead = $("<thead>");
-let trh = $("<tr>");
-let tdh1 = $("<td>").text("Ranking");
-let tdh2 = $("<td>").text("Name");
-let tdh3 = $("<td>").text("score");
-let tdh4 = $("<td>").text("gameTime");
+    let tableofBetter = $("<table>");
 
-thead.append(trh.append(tdh1, tdh2, tdh3, tdh4));
+    let thead = $("<thead>");
+    let trh = $("<tr>");
+    let tdh1 = $("<td>").text("Ranking");
+    let tdh2 = $("<td>").text("Name");
+    let tdh3 = $("<td>").text("nbPenality");
+    let tdh4 = $("<td>").text("gameTime");
 
-let tbody = $("<tbody>");
+    thead.append(trh.append(tdh1, tdh2, tdh3, tdh4));
 
-for(let index = 0; index < 10; index++){
-    let tr = $("<tr>");
-    tr.attr("id", "tr"+index);
+    let tbody = $("<tbody>");
 
-    let td1 = $("<td>").text(index+1);
-    let td2 = $("<td>").text("-");
-    let td3 = $("<td>").text("-");
-    let td4 = $("<td>").text("-");
-    tbody.append(tr.append(td1, td2, td3, td4));
+    for(let index = 0; index < 10; index++){
+        let tr = $("<tr>");
+        tr.attr("id", "tr"+index);
+
+        let td1 = $("<td>").text(index+1);
+        let td2 = $("<td>").text("-");
+        let td3 = $("<td>").text("-");
+        let td4 = $("<td>").text("-");
+        tbody.append(tr.append(td1, td2, td3, td4));
+    }
+    $("#tableBestWin").append(tableofBetter.append(thead, tbody));
+    tableofBetter.css('text-align', 'center');
 }
-$("#tableBestWin").append(tableofBetter.append(thead, tbody));
-tableofBetter.css('text-align', 'center');
 
 //declaration de variables
-let letter, nbChange = 3, wordUser = [], lettreOk, countLetter = 0;
-
+let letter, nbChange = 10, wordUser = [], lettreOk, countLetter = 0, nbPenality = 0;
+let beginGameTime, endGameTime, timePlaying;
+let nameButtonPlay = $("#play");
+let buttonLetter = $('button');
+let letterWinDisable;
+let showMessage = $("#message").show();
 
 //initialisation du tableau des meilleurs vainqueurs
 function playerWin(){
     this.name="";
-    this.score=10000;
+    this.penality=10000;
     this.time=10000;
 } 
 //tableau stockant le nom des 10 meilleures score
@@ -77,59 +92,87 @@ const initWordUser = () =>{
     console.log(wordUser.join(" "));
 }
 
-let buttonLetter = $('button');
-
+//generation du tableau des meilleurs au debut
+generateTableWinner();
+generateKeyPlaying();
 
 //programme principal
 $(document).ready(function(){
+
+    //debut du temps de jeu
+    beginGameTime = new Date();
+    nbChange = 10;
+    wordUser = [];
+    //countLetter = 0;
+    letter="";
+    nbPenality = 0;
+    console.log("word utili : "+wordUser);
+    $('button').attr("disabled", false);
+        
+    nameButtonPlay.text("Essayer un autre mot");
 
     newWordGenerator();
     initWordUser();
     console.log(motRandom+" length = "+word.length);
     $("#hiddenWord").text(wordUser.join(" "));
-    $('button[id]').click(function(){
-            letter = this.id.toUpperCase();
-            letterWinDisable = $(this);
-            console.log("lettre : "+letter);
-            verifieLettre();
+    $(".alphabetKey").click(function(){
+        letter = this.id.toUpperCase();
+        letterWinDisable = $(this);
+        console.log("lettre : "+letter);
+        letterWinDisable.attr("disabled", true);
+        letterWinDisable.css("background-color", "red");
+        letterWinDisable.css("color", "white");
+     //A corriger   if(letter==this.id.toUpperCase())
+        verifieLettre();
+        
     });   
 });
 
+/////////////////////////A CORRIGER///////////////////////////////////////
 //verification de la lettre
 const verifieLettre = () => {
-    lettreOk = 0;
+    lettreOk = false;
 
     for(let index=0; index < motRandom.length; index++){
         if(letter == motRandom[index]){
-            letterWinDisable.attr("disabled", true);
-            console.log(index+" : "+motRandom[index]);
+            letterWinDisable.css("background-color", "green");
+            console.log("index : "+index+" : "+motRandom[index]);
             wordUser[index] = motRandom[index];
-            countLetter++;
-            lettreOk += 1;
+            lettreOk = true;
             $("#hiddenWord").text(wordUser.join(" "));
         }           
     }
-
-    if(lettreOk == 0){
+    console.log("lettre ok : "+lettreOk);
+    console.log("lettre compte = "+countLetter+" = "+motRandom.length);
+    if(lettreOk == false){
         nbChange--;
+        nbPenality++;
         console.log("nb change "+nbChange);
     }
     console.log("user word "+wordUser.join(" "));
-    if(countLetter==motRandom.length || nbChange==0){
-        statuJeu();
-    }
+    statuJeu();    
 }
-
+///////////////////////////////////////////////////////////////////////////////////
 //verification du statut du joueur : win or lost
 const statuJeu = () =>{
     if (nbChange==0){
         console.log("perdu !"+"\n"+"C'était : "+motRandom);
         $("#message").html('<h4>'+"Dommage, vous avez ratez !\nC'était : "+'<span style="color: blue">'+motRandom+'</span>'+'</h4>');
+        return false;
     }
-    else if(wordUser.join("")==motRandom){
+    if(wordUser.join("")==motRandom){
+        //fin du temps de jeu et calcul du temps de jeu du vainqueur
+        //endGameTime = new Date();
+
+        timePlaying = Math.round((new Date() - beginGameTime.getTime())/1000);
+
         console.log("gagné !");
         $("#message").html('<h4>'+'Bravo, vous avez trouvez !'+'</h4>');
-        tenBestWinner();
+
+        if(nbPenality <= bestPlayer[9].penality){
+            tenBestWinner();
+        }
+        return true;
     }
 }
 
@@ -138,26 +181,49 @@ const tenBestWinner = () =>{
     //activation du div input
     $("#nameWinnerInputDiv").show();
 
-    $(function(){
+    // $(function(){
         $("#nameWinnerInput").change(function(){
-            bestPlayer[0].name = $("#nameWinnerInput").val();
-            console.log("Winner : "+bestPlayer[0].name);
+
+            bestPlayer[9].name = $("#nameWinnerInput").val();
+            bestPlayer[9].penality = nbPenality;
+            bestPlayer[9].time = timePlaying;
+            
+            console.log("Winner : "+bestPlayer[9].name);
+            console.log("penality : "+bestPlayer[9].penality);
+            console.log("time : "+bestPlayer[9].time);
+
             $("#nameWinnerInput").val(""); 
+            $("#nameWinnerInputDiv").hide();
+
+            //trie du tableau
+            bestPlayer.sort(function(a, b){
+                if(a.penality == b.penality)
+                    return a.time - b.time;
+                return a.penality - b.penality;
+            });
+
             displayTenBestWinner();
+            localStorage["savePerson"] = JSON.stringify(bestPlayer);
+            
+            
         });        
-    }); 
+    // }); 
 }
 
 const displayTenBestWinner = ()=>{
     //affichage du tableau des 10 meilleurs scores
     for(let i=0; i<bestPlayer.length; i++)
         if(bestPlayer[i].name !="")
-            $("#tr"+i).html('<td>'+(i+1)+'</td><td>'+bestPlayer[i].name+'</td><td>'+bestPlayer[i].score+'</td><td>'+bestPlayer[i].time+'</td>'); 
+            $("#tr"+i).html('<td>'+(i+1)+'</td><td>'+bestPlayer[i].name+'</td><td>'+bestPlayer[i].penality+'</td><td>'+bestPlayer[i].time+'</td>'); 
 }
-
+//chargement du tableau meilleurs
+if(localStorage["savePerson"]!=undefined){
+    bestPlayer = JSON.parse(localStorage["savePerson"]);
+    displayTenBestWinner();
+}
 //rechargement de la page
-$(function(){
-    $("#rejoue").click(function(){
+// $(function(){
+    $("#play").click(function(){
         location.reload(true);
     });
-});
+// });
