@@ -1,0 +1,121 @@
+:root{
+    --color-head-table1: rgb(17, 134, 235);
+    --color-head-table: #ffffff;
+}
+
+*, ::after, ::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: floralwhite;
+    font-size: 20px;
+}
+/*tous les div ayant pour class divgrid*/
+.divgrid{
+    max-width: 2000px;
+    display: grid;
+    justify-content: center;
+}
+/*nameWinnerInput*/
+#nameWinnerInput{
+    margin-top: 25px;
+    width: 250px; 
+    height: 50px;
+}
+/*le mot caché : hiddenWord*/
+#play{
+    width: 200px;
+    height: 50px;
+    background-color: var(--color-head-table1);
+    border: 2px solid var(--color-head-table1);
+    border-radius: 15px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#play:hover{
+    background-color: white; 
+    color: var(--color-head-table1);
+    border: 1px solid var(--color-head-table1);
+}
+
+/*image du pendu*/
+#imagePendu{
+    width: 300px; 
+    height: 250px; 
+    background-color: gray;
+}
+/*les touches alphabetiques du jeu [A...Z]*/
+#toucheAlphabet{
+    width: 50%;
+    margin-left: 25%;
+}
+#toucheAlphabet button{
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-head-table1);
+    color: white;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+#toucheAlphabet button:hover{
+    background-color: white;
+    color: var(--color-head-table1);
+    border: 1px solid var(--color-head-table1);
+    cursor: pointer;
+}
+/*Tableau des meilleurs vainqueurs*/
+#tableBestWin{
+    background-color: orange;
+    border: 1px solid white;
+}
+#tableBestWin thead tr{
+    background-color: var(--color-head-table1);
+    color: white;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+#tableBestWin th, td{
+    padding: 10px 15px;
+    text-align: center;
+  }
+  
+#tableBestWin tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+  
+#tableBestWin tbody tr:nth-last-of-type(even){
+    background-color: #f5f5f58f;
+}
+  
+#tableBestWin tbody tr:last-of-type{
+    border-bottom: 2px solid var(--color-head-table);
+}
+
+/*responsive*/
+@media only screen and (max-width: 767px) {
+
+    /*Tableau des meilleurs vainqueurs*/
+    #tableBestWin{
+      border-collapse: collapse;
+      margin: 25px auto;
+      font-size: 15px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    #tableBestWin th, td{
+      padding: 5px 10px;
+      text-align: center;
+    }
+    
+}

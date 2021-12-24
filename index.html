@@ -7,22 +7,41 @@
     <title>Le Pendu</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="dicoWords.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="display: grid; justify-content: center; row-gap: 20px;">
-    <div id="nameWinnerInputDiv">
+<body>
+    <div class="divgrid" id="nameWinnerInputDiv">
         <input id="nameWinnerInput" type="text" placeholder="entrer votre nom"></input>
     </div>
     <br><br>
-    <div>
+    <div class="divgrid">
         <h3 id="hiddenWord"></h3>
-        <button id="play">commencer une partie</button>
     </div>
     <br><br>
-    <div id="toucheAlphabet"></div>
+    <div class="divgrid">
+        <button id="play"></button>
+    </div>
+
     <br>
-    <div id="message"></div>
+    <div class="divgrid">
+        <img id="imagePendu" src=""></div>
+    </div>
+
     <br>
-    <div id="tableBestWin"></div>
+    <div class="divgrid">
+        <div class="" id="message"></div>
+    </div>
+    
+    <br><br>
+    <div class="divgrid">
+        <div id="toucheAlphabet"></div>
+    </div>
+
+    <br>
+    <div class="divgrid">
+        <div id="tableBestWin"></div>
+    </div>
+    <br><br><br><br>
 
     <script src="script.js"></script>
 </body>
