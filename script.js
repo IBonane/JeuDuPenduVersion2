@@ -68,7 +68,6 @@ let beginGameTime, endGameTime, timePlaying;
 let nameButtonPlay = $("#play");
 let buttonLetter = $('button');
 let letterWinDisable;
-let showMessage = $("#message").show();
 
 //initialisation du tableau des meilleurs vainqueurs
 function playerWin(){
@@ -101,7 +100,7 @@ $(document).ready(function(){
 
     //debut du temps de jeu
     beginGameTime = new Date();
-    nbChange = 10;
+    nbChange = 5;
     wordUser = [];
     //countLetter = 0;
     letter="";
@@ -110,7 +109,7 @@ $(document).ready(function(){
     $('button').attr("disabled", false);
         
     nameButtonPlay.text("Essayer un autre mot");
-
+    $("#message").html('<h4>'+'nombre de coup : '+nbChange+'</h4>');
     newWordGenerator();
     initWordUser();
     console.log(motRandom+" length = "+word.length);
@@ -131,8 +130,8 @@ $(document).ready(function(){
 /////////////////////////A CORRIGER///////////////////////////////////////
 //verification de la lettre
 const verifieLettre = () => {
+    
     lettreOk = false;
-
     for(let index=0; index < motRandom.length; index++){
         if(letter == motRandom[index]){
             letterWinDisable.css("background-color", "green");
@@ -148,6 +147,7 @@ const verifieLettre = () => {
         nbChange--;
         nbPenality++;
         console.log("nb change "+nbChange);
+        $("#message").html('<h4>'+'nombre de coup : '+nbChange+'</h4>');
     }
     console.log("user word "+wordUser.join(" "));
     statuJeu();    

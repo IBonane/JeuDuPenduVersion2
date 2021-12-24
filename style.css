@@ -100,7 +100,10 @@ body{
     border-bottom: 2px solid var(--color-head-table);
 }
 
-/*responsive*/
+
+/*§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§----Mobile Style----§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§*/
+/*-----------------------responsive-------------------------------*/
+
 @media only screen and (max-width: 767px) {
 
     /*Tableau des meilleurs vainqueurs*/
@@ -116,6 +119,5 @@ body{
     #tableBestWin th, td{
       padding: 5px 10px;
       text-align: center;
-    }
-    
+    }  
 }
