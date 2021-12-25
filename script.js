@@ -158,6 +158,7 @@ const statuJeu = () =>{
     if (nbChange==0){
         console.log("perdu !"+"\n"+"C'était : "+motRandom);
         $("#message").html('<h4>'+"Dommage, vous avez ratez !\nC'était : "+'<span style="color: blue">'+motRandom+'</span>'+'</h4>');
+        $(".alphabetKey").attr("disabled", true);
         return false;
     }
     if(wordUser.join("")==motRandom){
@@ -168,7 +169,7 @@ const statuJeu = () =>{
 
         console.log("gagné !");
         $("#message").html('<h4>'+'Bravo, vous avez trouvez !'+'</h4>');
-
+        $(".alphabetKey").attr("disabled", true);
         if(nbPenality <= bestPlayer[9].penality){
             tenBestWinner();
         }
