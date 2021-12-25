@@ -47,9 +47,10 @@ body{
 
 /*image du pendu*/
 #imagePendu{
-    width: 300px; 
+    width: 200px; 
     height: 250px; 
-    background-color: gray;
+    background-color: white;
+    border: 1px solid black;
 }
 /*les touches alphabetiques du jeu [A...Z]*/
 #toucheAlphabet{

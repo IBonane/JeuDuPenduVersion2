@@ -68,6 +68,7 @@ let beginGameTime, endGameTime, timePlaying;
 let nameButtonPlay = $("#play");
 let buttonLetter = $('button');
 let letterWinDisable;
+let indexCanvaDuPendus = 0;
 
 //initialisation du tableau des meilleurs vainqueurs
 function playerWin(){
@@ -97,7 +98,8 @@ generateKeyPlaying();
 
 //programme principal
 $(document).ready(function(){
-
+    //hideCanva
+    $(".hideCanva").hide();
     //debut du temps de jeu
     beginGameTime = new Date();
     nbChange = 5;
@@ -144,6 +146,8 @@ const verifieLettre = () => {
     console.log("lettre ok : "+lettreOk);
     console.log("lettre compte = "+countLetter+" = "+motRandom.length);
     if(lettreOk == false){
+        $("."+canvaDuPendus[indexCanvaDuPendus]).show();
+        indexCanvaDuPendus++;
         nbChange--;
         nbPenality++;
         console.log("nb change "+nbChange);
