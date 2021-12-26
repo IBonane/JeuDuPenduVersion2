@@ -1,0 +1,44 @@
+/*§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§----Mobile Style----§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§*/
+/*-----------------------responsive-------------------------------*/
+
+@media only screen and (max-width: 767px) {
+
+    /*message de perte*/
+    .msgLost{
+        text-align: center;
+    }
+
+    /* nameWinnerInputDiv*/
+    #nameWinnerInputDiv{
+        margin-top: -15%; 
+    }
+    #nameWinnerInput{
+        height: 30px; 
+    }
+    /*les touches alphabetiques du jeu [A...Z]*/
+    #toucheAlphabet{
+        margin-top: -10%;
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    #toucheAlphabet button{
+        width: 30px;
+        height: 30px;
+    }
+
+    /*Tableau des meilleurs vainqueurs*/
+    #tableBestWin{
+      border-collapse: collapse;
+      margin: 25px auto;
+      font-size: 15px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    #tableBestWin th, td{
+      padding: 5px 10px;
+      text-align: center;
+    }  
+}

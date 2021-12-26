@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le Pendu</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="dicoWords.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styleMobile.css">
+    <script src="./scripts/dicoWords.js"></script>
+    <link rel="stylesheet" href="./assets/styles/resetPaddingMargin.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/styles/styleMobile.css">
 </head>
+
 <body>
     <br>
-    <div style="width: 20%; background-color: blue; color: white;text-align: center;">
-        <a style="color: white;font-weight: bold; text-decoration: none;" href="index.html"><h4 >Acceuil</h4></a>
+    <div class="accueil">
+        <a href="index.html">
+            <h4 >Acceuil</h4>
+        </a>
     </div>
     <br><br>
     <div class="divgrid">
@@ -21,12 +25,12 @@
     </div>
     <br>
     <div class="divgrid">
-        <div class="imagePendu" id="simpleWinner" style="display: none;">
-            <img src="./images/simpleWin.gif" alt="Image du pendu" style="width: 150; height: 200px;">
+        <div class="imagePendu" id="simpleWinner">
+            <img src="./assets/images/simpleWin.gif" alt="Image du pendu" class="winImg">
         </div>
 
-        <div class="imagePendu" id="bestWinner" style="display: none;">
-            <img src="./images/win.gif" alt="Image du pendu" style="width: 150; height: 200px;">
+        <div class="imagePendu" id="bestWinner">
+            <img src="./assets/images/win.gif" alt="Image du pendu" class="winImg">
         </div>
 
         <div class="imagePendu" id="penduLost">
@@ -86,6 +90,7 @@
     </div>
     <br><br><br><br>
 
-    <script src="script.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
+
 </html>
