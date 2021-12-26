@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Pendu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="dicoWords.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleMobile.css">
+</head>
+<body>
+    <br>
+    <div style="width: 20%; background-color: blue; color: white;text-align: center;">
+        <a style="color: white;font-weight: bold; text-decoration: none;" href="index.html"><h4 >Acceuil</h4></a>
+    </div>
+    <br><br>
+    <div class="divgrid">
+        <button id="play"></button>
+    </div>
+    <br>
+    <div class="divgrid">
+        <div class="imagePendu" id="simpleWinner" style="display: none;">
+            <img src="./images/simpleWin.gif" alt="Image du pendu" style="width: 150; height: 200px;">
+        </div>
+
+        <div class="imagePendu" id="bestWinner" style="display: none;">
+            <img src="./images/win.gif" alt="Image du pendu" style="width: 150; height: 200px;">
+        </div>
+
+        <div class="imagePendu" id="penduLost">
+            <svg width="200" height="250">
+                <!--Support---------------------------->
+                <line class="support hideCanva" x1="60" y1="20" x2="140" y2="20" stroke="red" stroke-width="3"/>
+                <line class="support hideCanva" x1="140" y1="20" x2="140" y2="50" stroke="red" stroke-width="3"/>
+                <line class="support hideCanva" x1="60" y1="20" x2="60" y2="230" stroke="red" stroke-width="3"/>
+                <line class="support hideCanva" x1="20" y1="230" x2="100" y2="230" stroke="red" stroke-width="3"/>
+
+                <!--Bonhomme---------------------------->
+
+                <!--Tete----------->
+                <circle class="tete hideCanva" cx="140" cy="70" r="20" stroke="blue" fill="none" stroke-width="2"/>
+        
+                <!--Corps---------->
+                <line class="corps hideCanva" x1="140" y1="90" x2="140" y2="150" stroke="blue" stroke-width="2"/>
+        
+                <!--Bras----------->
+                <!--Bras Droit-->
+                <line class="bras hideCanva" x1="140" y1="120" x2="120" y2="100" stroke="blue" stroke-width="2"/>
+                <!--Bras Gauche-->
+                <line class="bras hideCanva" x1="140" y1="120" x2="160" y2="100" stroke="blue" stroke-width="2"/>
+        
+                <!--Jambes ---------->
+                <!--Jambes Droit-->
+                <line class="jambes hideCanva" x1="140" y1="150" x2="120" y2="180" stroke="blue" stroke-width="2"/>
+                <!--Jambes Gauche-->
+                <line class="jambes hideCanva" x1="140" y1="150" x2="160" y2="180" stroke="blue" stroke-width="2"/>
+            </svg>
+          </div>
+    </div>
+    <br>
+
+    <div class="divgrid">
+        <h3 id="hiddenWord"></h3>
+    </div>
+    <br>
+
+    <div class="divgrid">
+        <div class="msgLost" id="message"></div>
+    </div>
+    <br><br>
+
+    <div class="divgrid" id="nameWinnerInputDiv">
+        <input id="nameWinnerInput" type="text" placeholder="Entrer votre nom, SVP !"></input>
+    </div>
+    <br><br>
+
+    <div class="divgrid">
+        <div id="toucheAlphabet"></div>
+    </div>
+
+    <br>
+    <div class="divgrid">
+        <div id="tableBestWin"></div>
+    </div>
+    <br><br><br><br>
+
+    <script src="script.js"></script>
+</body>
+</html>
